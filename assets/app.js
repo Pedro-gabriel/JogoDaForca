@@ -20,6 +20,26 @@ let indiceBoneco;
 const numTentativas = 7;
 /* Valor para opacidade dos olhos */
 const opacidadeOlhos = 0.3;
+const categorias = {
+    frutas: ["banana", "maça", "laranja", "pera", "malancia", "malao"],
+    profissoes: ["professor", "advogado", "medico", "lixeiro", "engenheiro"],
+    animais: ["gato", "cachorro", "passaro", "macaco", "galo", "cavalo", "leao"],
+    cores: ["preto", "vermelho", "azul"]
+};
+
+function retornaArrayCategorias(){
+    return Object.keys(categorias);
+};
+
+function retornaCategoria(){
+    const arrayCategorias = retornaArrayCategorias();
+    let indiceCategoria = Math.floor(Math.random() * arrayCategorias.length);
+    return arrayCategorias[indiceCategoria];
+};
+
+function exibeCategoria(){
+    categoria.innerHTML = retornaCategoria();
+}
 
 
 /*
@@ -65,6 +85,8 @@ Inicia as configurações do jogo
 function iniciaJogo(){
     indiceBoneco = 0;
     letrasErradasArray = [];
+    ocultaBoneco();
+    exibeCategoria();
     letrasErradas.innerHTML = "Letras erradas: ";
     window.addEventListener("keypress", retornaLetra);
 }
