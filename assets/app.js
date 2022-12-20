@@ -70,6 +70,10 @@ function exibePalavraInterface(palavra){
 function letraExistente(letra){
     if(!letrasErradasArray.includes(letra)){
         letrasErradasArray.push(letra);
+        letrasErradas.innerHTML= "Letras Erradas:" + letrasErradasArray;
+        if(partesBoneco.length > indiceBoneco){
+            desenhaBoneco();
+        }
     }
     return letrasErradasArray;
 }
@@ -79,10 +83,18 @@ function tentativa(letra){
         atualizaPalavraInterface(letra);
     }else{
         letrasErradasArray =  letraExistente(letra);
-        letrasErradas.innerHTML= "Letras Erradas:" + letrasErradasArray;
-        if(partesBoneco.length > indiceBoneco){
-            desenhaBoneco();
-        }
+    }
+    verificaFimDeJogo();
+}
+
+function verificaFimDeJogo(){
+    if(!palavraInterface.innerHTML.includes("-")){
+        exibePalavraInterface("!Você Venceu!");
+        window.removeEventListener("Keypress", retornaLetra);
+    }else if(letrasErradasArray.length >= numTentativas){
+        desenhaOlhos();
+        exibePalavraInterface("!Você Perdeu!");
+        window.removeEventListener("keypress", retornaLetra);
     }
 }
 
