@@ -65,6 +65,41 @@ function exibePalavraInterface(palavra){
     palavraInterface.innerHTML = palavra;
 }
 
+
+// Verifica de a letra já existe evitanto repetições no array
+function letraExistente(letra){
+    if(!letrasErradasArray.includes(letra)){
+        letrasErradasArray.push(letra);
+    }
+    return letrasErradasArray;
+}
+
+function tentativa(letra){
+    if(palavraProposta.includes(letra)){
+        atualizaPalavraInterface(letra);
+    }else{
+        letrasErradasArray =  letraExistente(letra);
+        letrasErradas.innerHTML= "Letras Erradas:" + letrasErradasArray;
+        if(partesBoneco.length > indiceBoneco){
+            desenhaBoneco();
+        }
+    }
+}
+
+function atualizaPalavraInterface(letra){
+    let palavraAuxiliar = "";
+    for(let i = 0; i < palavraProposta.length; i++){
+        if(palavraProposta[i] === letra){
+            palavraAuxiliar += letra;
+        }else if(palavraInterface.innerHTML[i] !== "-" ){
+            palavraAuxiliar += palavraInterface.innerHTML[i];
+        }else{
+            palavraAuxiliar += "-";
+        }
+    }
+    exibePalavraInterface(palavraAuxiliar);
+}
+
 /*
 Recebe o evento do teclado e passa apenas o valor da letra para a função tentativa
 */
