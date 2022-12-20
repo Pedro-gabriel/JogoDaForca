@@ -41,6 +41,29 @@ function exibeCategoria(){
     categoria.innerHTML = retornaCategoria();
 }
 
+function retornaNumAleatorio(max){
+    return Math.floor(Math.random() * max);
+}
+
+function definePalavraProposta(){
+    const arrayPalavras = categorias[categoria.innerHTML];
+    let indicePalavra = retornaNumAleatorio(arrayPalavras.length);
+    palavraProposta = arrayPalavras[indicePalavra];
+    console.log(palavraProposta);
+    ocultaPalavra();
+}
+
+function ocultaPalavra(){
+    let palavraOcultada = "";
+    for(let i = 0; i < palavraProposta.length; i++){
+        palavraOcultada+="-";
+    }
+    exibePalavraInterface(palavraOcultada);
+}
+
+function exibePalavraInterface(palavra){
+    palavraInterface.innerHTML = palavra;
+}
 
 /*
 Recebe o evento do teclado e passa apenas o valor da letra para a função tentativa
@@ -87,6 +110,7 @@ function iniciaJogo(){
     letrasErradasArray = [];
     ocultaBoneco();
     exibeCategoria();
+    definePalavraProposta();
     letrasErradas.innerHTML = "Letras erradas: ";
     window.addEventListener("keypress", retornaLetra);
 }
